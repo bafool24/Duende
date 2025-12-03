@@ -1,8 +1,8 @@
 Add-Type -AssemblyName PresentationFramework,PresentationCore,WindowsBase,System.Windows.Forms
 
 # Rutas de archivos
-$imagePath = "C:\LabboxDuende\duende.png"
-$soundPath = "C:\LabboxDuende\duende.wav"
+$imagePath = "C:\DuendePrueba\duende.png"
+$soundPath = "C:\DuendePrueba\duende.wav" 
 
 # Cargar imagen
 $bitmap = New-Object System.Windows.Media.Imaging.BitmapImage
@@ -40,7 +40,7 @@ foreach ($screen in $screens) {
     $grid.Children.Add($img)
 
     $title = New-Object System.Windows.Controls.TextBlock
-    $title.Text = "⚠ LABBOX ALERTA ⚠`nEl duende travieso ha intervenido tu PC."
+    $title.Text = " LABBOX ALERTA `nEl duende travieso ha intervenido tu PC."
     $title.Foreground = 'White'
     $title.FontSize = 42
     $title.FontWeight = 'Bold'
@@ -70,3 +70,4 @@ $player.Stop()
 foreach ($w in $windows) { $w.Close() }
 
 [System.Windows.Threading.Dispatcher]::ExitAllFrames()
+
