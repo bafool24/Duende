@@ -1,8 +1,7 @@
 Add-Type -AssemblyName PresentationFramework,PresentationCore,WindowsBase,System.Windows.Forms
 
-# Rutas de archivos
 $imagePath = "C:\DuendePrueba\duende.png"
-$soundPath = "C:\DuendePrueba\duende.wav" 
+$soundPath = "C:\DuendePrueba\duende.wav"
 
 # Cargar imagen
 $bitmap = New-Object System.Windows.Media.Imaging.BitmapImage
@@ -11,11 +10,11 @@ $bitmap.UriSource = $imagePath
 $bitmap.CacheOption = "OnLoad"
 $bitmap.EndInit()
 
-# Cargar sonido usando MediaPlayer
+# Cargar sonido
 $player = New-Object System.Windows.Media.MediaPlayer
 $player.Open($soundPath)
 
-# Pantallas
+# Ventanas
 $screens = [System.Windows.Forms.Screen]::AllScreens
 $windows = @()
 
@@ -27,9 +26,9 @@ foreach ($screen in $screens) {
     $window.Topmost = $true
     $window.ShowInTaskbar = $false
 
-    $window.Left   = $screen.Bounds.X
-    $window.Top    = $screen.Bounds.Y
-    $window.Width  = $screen.Bounds.Width
+    $window.Left = $screen.Bounds.X
+    $window.Top = $screen.Bounds.Y
+    $window.Width = $screen.Bounds.Width
     $window.Height = $screen.Bounds.Height
 
     $grid = New-Object System.Windows.Controls.Grid
@@ -43,7 +42,6 @@ foreach ($screen in $screens) {
     $title.Text = " LABBOX ALERTA `nEl duende travieso ha intervenido tu PC."
     $title.Foreground = 'White'
     $title.FontSize = 42
-    $title.FontWeight = 'Bold'
     $title.HorizontalAlignment = 'Center'
     $title.VerticalAlignment = 'Top'
     $title.Margin = '0,50,0,0'
@@ -53,21 +51,14 @@ foreach ($screen in $screens) {
     $windows += $window
 }
 
-# Mostrar ventanas
 foreach ($w in $windows) { $w.Show() }
 
-# Iniciar sonido
-$player.Volume = 1.0
+$player.Volume = 1
 $player.Play()
 
-# Mantener 12 segundos
-Start-Sleep -Seconds 12
+Start-Sleep 12
 
-# Detener sonido
 $player.Stop()
-
-# Cerrar ventanas
 foreach ($w in $windows) { $w.Close() }
 
-[System.Windows.Threading.Dispatcher]::ExitAllFrames()
-
+# FIN
